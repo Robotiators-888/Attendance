@@ -1,7 +1,9 @@
 # Attendance
 Hour logging program
 
-with Google sheets intergration and local backups to prevent data loss
+with Google sheets intergration and local storage to prevent data loss
+
+﹀﹀ see bottom for common problems/issues ﹀﹀
 
 ## Running the Program
 
@@ -39,3 +41,20 @@ path: Robot(Students Mentors)/AttendanceInfo/New Attendance System/AttendanceKey
 Create a new google sheet and share with the following email: attendance@attendance-188719.iam.gserviceaccount.com
 
 In dataUploader.py change varible sheetName to the name of the sheet you created
+
+## Common Problems/Issues
+
+### this sections shows common issues and how to fix them
+
+``` FileNotFoundError: [Errno 2] No such file or directory: 'AttendanceKey.json' ```
+
+- fix: see section Set up Google Sheets integrations
+
+``` File blocked [Errno 2] No such file or directory: 'data/tempHour.pickle' ```
+
+- fix: create a folder named "data", in this folder 
+
+
+``` TypeError: can only concatenate str (not "PermissionError") to str ```
+
+- fix: close any programs acessing "pins.csv", (on Windows only one program can view a file at a time)
