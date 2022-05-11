@@ -30,8 +30,8 @@ def waitForReadPickle(path):
                 data = pickle.load(f)
                 print("loaded pickle", data)
             read = True
-        except:
-            print("File blocked")
+        except Exception as e:
+            print("File blocked",e)
         time.sleep(0.1)
     return data
 
