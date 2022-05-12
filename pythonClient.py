@@ -140,7 +140,7 @@ def logout(pin, ignoreHours=False):
 
                 tempHour.pop(pin)
             except KeyError:
-                return "Not logged out, you are not logged in"
+                return "(Try logging in again) error logging in"
             return "Logged out "+user+" at "+str(dt.datetime.now())
 
 
