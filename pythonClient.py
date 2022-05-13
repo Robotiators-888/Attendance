@@ -94,6 +94,7 @@ def login(pin):
         return "Invalid Pin"
     else:
         tempHour[pin] = dt.datetime.now()
+
         
         data = waitForReadPickle("data/attendance.pickle")
         data.append([
@@ -125,6 +126,12 @@ def logout(pin, ignoreHours=False):
         else:
             try:
                 currentSeconds = (dt.datetime.now() - tempHour[pin]).total_seconds()
+                # check if login happened on a diferent day than today
+                forgotLogout = False
+                if (dt.datetime.now().date() != tempHour[pin].date()):
+                    forgotLogout = True
+                    #set hours to 2.5
+                    currentSeconds = 2.5*60*60
 
                 # test of read and write
                 data = waitForReadPickle("data/attendance.pickle")
@@ -141,6 +148,8 @@ def logout(pin, ignoreHours=False):
                 tempHour.pop(pin)
             except KeyError:
                 return "Not logged out, you are not logged in"
+            if forgotLogout:
+                return "Forgot to logout, you get 2.5 hours"
             return "Logged out "+user+" at "+str(dt.datetime.now())
 
 

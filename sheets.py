@@ -5,6 +5,10 @@ import time
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread_formatting
 
+#console colors
+BLUE = '\033[94m'
+RED = '\033[91m'
+ENDC = '\033[0m'
 
 
 class sheets:
@@ -45,6 +49,8 @@ class sheets:
             canOpenSheet = True
         except Exception as e:
             print("could not open sheet", sheetName,e)
+
+            print(RED+"(Check your internet connection!)"+ENDC)
             canOpenSheet = False
 
         # open and return sheet
@@ -52,7 +58,7 @@ class sheets:
             sheet = client.open(sheetName).sheet1
             return sheet
         else:
-            print("sheet does not exist or there is error accessing it")
+            print(RED+"sheet does not exist or there is error accessing it"+ENDC)
             return None
 
     # first row is "names" second row is "total hours"
@@ -62,10 +68,10 @@ class sheets:
         totalNumCols = sheet.col_count
         print("totalNumCols", totalNumCols)
 
-        # insert many new colums until have 365!
-        while (totalNumCols < 365):
+        # insert many new colums until have 180!
+        while (totalNumCols < 180):
             try:
-                sheet.insert_cols(["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],28)
+                sheet.insert_cols(["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],20)
             except:
                 print("error inserting cols but it still works")
             # update col_count
@@ -86,7 +92,7 @@ class sheets:
                 bold=True, foregroundColor=gspread_formatting.color(1, 0, 1)),
             horizontalAlignment='CENTER'
         )
-        gspread_formatting.format_cell_range(sheet, '1:1000', fmt)
+        gspread_formatting.format_cell_range(sheet, '1:1', fmt)
 
     # row 1 names, row 2 hours
 

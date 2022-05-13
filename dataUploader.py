@@ -2,8 +2,13 @@ import pythonClient
 import time
 import sheets
 import os
-sheetName = "AttendanceOffSeason2022" 
+sheetName = "AttendanceOffSeason2022Test" 
 sheetObject = sheets.sheets(sheetName)
+
+#console colors
+BLUE = '\033[94m'
+RED = '\033[91m'
+ENDC = '\033[0m'
 
 def mainLoop():
     uploadIndex = 0
@@ -17,18 +22,22 @@ def mainLoop():
         # get modified time of data
         # if modified time is newer than the last modified time
         #   getData
-        currentModifiedTime = os.path.getmtime("data/attendance.pickle")
-        if (currentModifiedTime > modifiedTime):
-            modifiedTime = currentModifiedTime
-            # get the data from the pickle
-            data = getData()
-            #if new data is available, update the sheet
-            if (data != None or data != []):
-                while (uploadIndex < len(data)):
-                    uploadData(data[uploadIndex])
-                    print('uploadIndex',uploadIndex)
-                    uploadIndex += 1
-                    pythonClient.waitForWritePickle("data/UploadIndex.pickle",uploadIndex)
+        # FIRST CHECK IF attendance.pickle exists!?
+        if (os.path.isfile("data/attendance.pickle")):
+            currentModifiedTime = os.path.getmtime("data/attendance.pickle")
+            if (currentModifiedTime > modifiedTime):
+                modifiedTime = currentModifiedTime
+                # get the data from the pickle
+                data = getData()
+                #if new data is available, update the sheet
+                if (data != None or data != []):
+                    while (uploadIndex < len(data)):
+                        uploadData(data[uploadIndex])
+                        print('uploadIndex',uploadIndex)
+                        uploadIndex += 1
+                        pythonClient.waitForWritePickle("data/UploadIndex.pickle",uploadIndex)
+        else:
+            print(BLUE+"no attendance.pickle (Try logging in a user)"+ENDC)
         time.sleep(1)
 
 def getData():
