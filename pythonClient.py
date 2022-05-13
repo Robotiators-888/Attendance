@@ -30,8 +30,8 @@ def waitForReadPickle(path):
                 data = pickle.load(f)
                 print("loaded pickle", data)
             read = True
-        except:
-            print("File blocked")
+        except Exception as e:
+            print("File blocked",e)
         time.sleep(0.1)
     return data
 
@@ -147,9 +147,7 @@ def logout(pin, ignoreHours=False):
 
                 tempHour.pop(pin)
             except KeyError:
-                return "Not logged out, you are not logged in"
-            if forgotLogout:
-                return "Forgot to logout, you get 2.5 hours"
+                return "(Try logging in again) error logging in"
             return "Logged out "+user+" at "+str(dt.datetime.now())
 
 
