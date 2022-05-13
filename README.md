@@ -58,3 +58,7 @@ In dataUploader.py change varible sheetName to the name of the sheet you created
 ``` TypeError: can only concatenate str (not "PermissionError") to str ```
 
 - fix: close any programs acessing "pins.csv", (on Windows only one program can view a file at a time)
+
+``` FileNotFoundError: [WinError 2] The system cannot find the file specified: 'data/attendance.pickle' ```
+
+- fix: try logging in a user (logging in creates "attendance.pickle")
