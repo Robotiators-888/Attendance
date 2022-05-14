@@ -1,3 +1,4 @@
+from cgitb import text
 from os.path import exists
 import datetime
 import gspread
@@ -86,13 +87,18 @@ class sheets:
         sheet.update_cell(1, 2, headerRow[1])
         sheet.update_cell(1, 3, headerRow[2])
 
-        fmt = gspread_formatting.cellFormat(
+        headerFormat = gspread_formatting.cellFormat(
             backgroundColor=gspread_formatting.color(1, 0.9, 0.9),
             textFormat=gspread_formatting.textFormat(
                 bold=True, foregroundColor=gspread_formatting.color(1, 0, 1)),
             horizontalAlignment='CENTER'
         )
-        gspread_formatting.format_cell_range(sheet, '1:1', fmt)
+        textFormat = gspread_formatting.cellFormat(
+            horizontalAlignment='CENTER'
+        )
+        gspread_formatting.format_cell_range(sheet, '1:1', headerFormat)
+        gspread_formatting.format_cell_range(sheet, '2:1000', textFormat)
+
 
     # row 1 names, row 2 hours
 
