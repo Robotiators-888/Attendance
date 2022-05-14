@@ -7,9 +7,9 @@ with Google sheets intergration and local storage to prevent data loss
 
 ## Running the Program
 
-Run registering program with:
+Register user with:
 ```
-python3 registerGui.py
+click Open Register button in gui
 ```
 
 Run hour-logging program with: 
