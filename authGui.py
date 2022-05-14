@@ -9,6 +9,7 @@ import os
 import time
 import pythonClient
 import subprocess
+import registerGui
 
 
 class LogHourForm:
@@ -37,6 +38,9 @@ class LogHourForm:
         btn_submit = Button(self.window, text="Submit", command=self.chooser)
         btn_submit.pack(anchor='center')
 
+        btn_register = Button(self.window, text="Open Register", command=self.registerForm)
+        btn_register.pack(anchor='ne')
+
         self.msg = Label(self.window)
         self.msg.pack(anchor='center')
 
@@ -51,10 +55,16 @@ class LogHourForm:
 
         imageLabel.pack(anchor='center', side=BOTTOM)
 
-
-
         self.window.after(1000, self.logOutForgotLogin) 
         self.window.mainloop()
+
+    def registerForm(self):
+        # # popen registerGui.py
+        # subprocess.Popen(["python", "registerGui.py"])
+
+        # import registerGui
+        registerGui.RegisterForm()
+        
 
     def loginUser(self,pin):
         self.msg.configure(text=login(pin))

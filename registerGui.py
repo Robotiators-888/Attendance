@@ -49,4 +49,4 @@ class RegisterForm:
 
 
 # Start the application
-RegisterForm()
+#RegisterForm()
