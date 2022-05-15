@@ -38,10 +38,7 @@ python3 authGui.py
 python3 dataUploader.py
 ```
 
-Register user with:
-
-click Open Register button in gui
-
+To register a new user, click Open Register button and Registering form will open
 
 
 ## Common Problems/Issues
