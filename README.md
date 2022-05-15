@@ -30,7 +30,7 @@ In dataUploader.py change varible sheetName to the name of the sheet you created
 
 ## Running the Program
 
-Run hour-logging program with: 
+Run hour-logging programs in seperate terminals with: 
 ```
 python3 authGui.py
 ```
