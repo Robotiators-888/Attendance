@@ -15,9 +15,11 @@ pip install gspread oauth2client gspread_formatting pillow playsound
 
 Download AttendanceKey from Google Drive into this folder
 
-path: Robot(Students Mentors)/AttendanceInfo/New Attendance System/AttendanceKey.json
+https://drive.google.com/file/d/1IGdCRpVJ-9u8LVIXyxxpkptcCYXX9_Oc/view?usp=sharing
 
 **Do not commit AttendanceKey.json to the repo! this is a private key!**
+
+**Google Drive Links to AttendanceKey.json must be Restricted!**
 
 
 ## Creating a new sheet:
