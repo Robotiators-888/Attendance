@@ -39,9 +39,9 @@ python3 dataUploader.py
 ```
 
 Register user with:
-```
+
 click Open Register button in gui
-```
+
 
 
 ## Common Problems/Issues
