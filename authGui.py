@@ -59,10 +59,6 @@ class LogHourForm:
         self.window.mainloop()
 
     def registerForm(self):
-        # # popen registerGui.py
-        # subprocess.Popen(["python", "registerGui.py"])
-
-        # import registerGui
         registerGui.RegisterForm()
         
 
