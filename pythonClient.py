@@ -109,6 +109,7 @@ def login(pin):
         return "Logged in "+user+" at "+str(tempHour[pin])
 
 def logout(pin, ignoreHours=False):
+    forgotLogout = False
     print("logout")
     if ignoreHours:
         user = getUserFromPin(pin)
@@ -148,7 +149,10 @@ def logout(pin, ignoreHours=False):
                 tempHour.pop(pin)
             except KeyError:
                 return "(Try logging in again) error logging in"
-            return "Logged out "+user+" at "+str(dt.datetime.now())
+            if forgotLogout:
+                return "Forgot to logout, you get 2.5 hours"
+            else:
+                return "Logged out "+user+" at "+str(dt.datetime.now())
 
 
 def register(name,pin):
