@@ -2,7 +2,7 @@ import pythonClient
 import time
 import sheets
 import os
-sheetName = "AttendanceOffSeason2022" 
+sheetName = "AttendanceOffSeason2022Test" 
 sheetObject = sheets.sheets(sheetName)
 
 #console colors
@@ -11,13 +11,27 @@ RED = '\033[91m'
 ENDC = '\033[0m'
 
 def mainLoop():
+    """ main loop for uploading data """
+
     uploadIndex = 0
     tempUploadIndex = pythonClient.waitForReadPickle("data/UploadIndex.pickle")
     if (tempUploadIndex != []):
         uploadIndex = tempUploadIndex   
     data = None
     modifiedTime = 0
+
+    # upload index is the pickle list index of the last user that was uploaded 
+
+
+
     while True:
+        """ loop waits for new data in pickle list """
+        """ then uploads data """
+        """ increases upload index """
+        """ if index of data is greater than upload index, upload data """
+
+        """ pickle list is a file called "attendance.pickle"  containing a list of login/logout data """
+
         #check if new data is available
         # get modified time of data
         # if modified time is newer than the last modified time
@@ -40,10 +54,14 @@ def mainLoop():
             print(BLUE+"no attendance.pickle (Try logging in a user)"+ENDC)
         time.sleep(1)
 
-def getData():
+def getData() -> list:
+    """ get data from pickle list """
+
+    """ pickle list is a list of login/logout data """
+
+    """ login/logout data object format shown below """
+
     return pythonClient.waitForReadPickle("data/attendance.pickle")
-
-
 
 #user:
 # [
@@ -62,6 +80,9 @@ def getData():
 
 # userData is a single list from the pickle list
 def uploadData(user):
+    """ uploads data to the google sheet """
+
+
     userName = user[0]
     loginSeconds = user[1]
     loginTime = user[2]

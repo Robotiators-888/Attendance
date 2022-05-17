@@ -13,29 +13,22 @@ ENDC = '\033[0m'
 
 
 class sheets:
+    """ Access Google Sheets and update attendance """
+
     def __init__(self, sheetName):
+        """ get sheet and setup """
+
+        """ sheetName is the name of the shared sheet in google sheets """
+
         self.sheet = self.getSpreadsheet(sheetName)
         self.setupSheet(self.sheet)
         self.names = self.getSheetNames(self.sheet)
         self.dates = self.getSheetDates(self.sheet)
 
 
+    def getSpreadsheet(self,sheetName) -> gspread.models.Spreadsheet:
+        """ get shared spreadsheet by name"""
 
-        # def setupSheet(self, sheet):
-        #     setupSheet(sheet)
-
-        # def sendHours(self, name, hours,date=datetime.datetime.now()):
-        #     sendHours(self.sheet, name, hours,date,self.names,self.dates)
-        # def login(self, name):
-        #     login(self.sheet, name)
-        # def logout(self, name):
-        #     logout(self.sheet, name)
-        # def getSheetNames(self):
-        #     return getSheetNames(self.sheet)
-        # def getSheetDates(self):
-        #     return getSheetDates(self.sheet)
-
-    def getSpreadsheet(self,sheetName):
         scope = ['https://spreadsheets.google.com/feeds',
                 'https://www.googleapis.com/auth/drive']
         creds = ServiceAccountCredentials.from_json_keyfile_name(
@@ -66,6 +59,13 @@ class sheets:
 
 
     def setupSheet(self,sheet):
+        """ set up sheet for attendance """
+
+        # steps to setup sheet
+        # 1. adds 180 collums to sheet if there is less
+        # 2. add a header row with Name, Total Hours, Logged In, Date
+        # 3. format the header row pink and center align all cells
+
         totalNumCols = sheet.col_count
         print("totalNumCols", totalNumCols)
 
@@ -87,6 +87,7 @@ class sheets:
         sheet.update_cell(1, 2, headerRow[1])
         sheet.update_cell(1, 3, headerRow[2])
 
+        # formating:
         headerFormat = gspread_formatting.cellFormat(
             backgroundColor=gspread_formatting.color(1, 0.9, 0.9),
             textFormat=gspread_formatting.textFormat(
@@ -100,12 +101,14 @@ class sheets:
         gspread_formatting.format_cell_range(sheet, '2:1000', textFormat)
 
 
-    # row 1 names, row 2 hours
+   
 
-    # row 1 names, row 2 hours
-    # uses index in names list to find row of name
-    # offset is how many rows to skip
-    def findName(self,name):
+ 
+    def findName(self,name:str) -> int:
+        """ find name in sheet and return row """ 
+
+        """ name is the name of a user"""
+
         offset = 2
         # check if name in names list
         if (name in self.names):
@@ -129,8 +132,12 @@ class sheets:
 
 
 
-    #todayDate is a string
-    def findDate(self,todayDate):
+
+    def findDate(self,todayDate:str) -> int:
+        """ find date in sheet and return col """
+
+        """ todayDate is the date in mm/dd/yyyy format """
+
         offset = 4
         # check if todayDate is in date list
         if (todayDate in self.dates):
@@ -148,6 +155,15 @@ class sheets:
         
 
     def sendHours(self, name, hours,date=datetime.datetime.now()):
+        """ send hours to sheet """
+
+        """ hours is a number of hours """
+        """ inserted into the sheet at the current date and current name """
+        """ hours are totaled and added to the total hours column """
+
+        """ name is the name of a user"""
+
+
         print("sending hours")
 
         todayDate = date.today().strftime("%m/%d/%Y")
@@ -159,30 +175,42 @@ class sheets:
         self.sheet.update_cell(row, col, str(hours))
 
 
-    #row 3: is logged in
+
     def login(self,name):
+        """ Login a user """
+
         row = self.findName(name)
         self.sheet.update_cell(row, 3, "yes")
     def logout(self,name):
+        """ Logout a user """
+
         row = self.findName(name)
         self.sheet.update_cell(row, 3, "no")
 
-        # returns a list of all names in the sheet
-        # names start (2,1) and go down to the end
-    def getSheetNames(self,sheet):
-            row = 2
-            names = []
-            while (True):
-                cell = sheet.cell(row, 1).value
-                if (cell == "" or cell == None):
-                    break
-                names.append(cell)
-                row += 1
-            return names
 
-        # returns a list of all dates in the sheet
-        # dates start (1,4) and go right to the end
-    def getSheetDates(self,sheet):
+
+    def getSheetNames(self,sheet) -> list:
+        """ returns a list of all names in the sheet """
+
+        """ names start (2,1) and go down to the end """
+
+        row = 2
+        names = []
+        while (True):
+            cell = sheet.cell(row, 1).value
+            if (cell == "" or cell == None):
+                break
+            names.append(cell)
+            row += 1
+        return names
+
+
+
+    def getSheetDates(self,sheet) -> list:
+        """ returns a list of all dates in the sheet"""
+
+        """ dates start (1,4) and go right to the end """
+
         col = 4
         dates = []
         while (True):
