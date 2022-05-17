@@ -3,6 +3,8 @@ Hour logging program
 
 with Google sheets intergration and local storage to prevent data loss
 
+made with python3
+
 ﹀﹀ see bottom for common problems/issues ﹀﹀
 
 ## Install all packages
