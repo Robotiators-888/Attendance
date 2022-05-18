@@ -45,7 +45,7 @@ To register a new user, click Open Register button and Registering form will ope
 
 ## Common Problems/Issues
 
-### this sections shows common issues and how to fix them
+### This section shows common issues and how to fix them
 
 ``` FileNotFoundError: [Errno 2] No such file or directory: 'AttendanceKey.json' ```
 
@@ -56,10 +56,29 @@ To register a new user, click Open Register button and Registering form will ope
 - fix: create a folder named "data", in the same folder as dataUploader.py 
 
 
-``` TypeError: can only concatenate str (not "PermissionError") to str ```
+``` (ON GUI) Error in registering: <class: 'PermissionError> ```
 
 - fix: close any programs acessing "pins.csv", (on Windows only one program can view a file at a time)
 
 ``` FileNotFoundError: [WinError 2] The system cannot find the file specified: 'data/attendance.pickle' ```
 
 - fix: try logging in a user (logging in creates "attendance.pickle")
+
+## Updating the code
+
+First, in Git BASH:
+```git clone https://github.com/Robotiators-888/Attendance.git```
+
+Second, make your changes. 
+- pythonClient.py handles the "backend" of the program (login, logout, and register functionality)
+- authGui.py and registerGui.py handle the "frontend" of the program (Tkinter GUI)
+- dataUploader.py and sheets.py handle the uploading of data from the Python client to the Google sheet
+- Streamlit website is on a different repo that can be viewed [here](https://github.com/KevinH45/AttendanceWebsite)
+- **DO NOT PUSH AttendanceKey.json ONTO THE GITHUB REPO**
+
+Finally, in Git BASH:
+
+- cd into your directory
+-  ``` git add -A ```
+- ```git commit -m "your message"```
+- ```git push origin main```

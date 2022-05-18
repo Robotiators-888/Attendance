@@ -36,6 +36,10 @@ class RegisterForm:
 
 		user = self.username.get()
 		pinLog = self.pin.get()
+
+		self.username.delete(0,END)
+		self.pin.delete(0,END)
+		
 		# tell the user if pin or username already exists
 		# use getUserFromPin to check if the pin is already registered 
 		# also check if username already exits using nameExits()

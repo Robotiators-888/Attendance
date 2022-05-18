@@ -163,7 +163,7 @@ def register(name,pin):
         return "Registered "+name
     except Exception as e:
         print(e)
-        return "Error in registering: "+e
+        return "Error in registering: "+ str(e)
 
 
 

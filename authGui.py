@@ -1,14 +1,7 @@
-import imp
 from tkinter import *
 from pythonClient import login,logout, waitForWritePickle
 from PIL import Image, ImageTk
-import datetime as dt
-from playsound import playsound
-import pickle
-import os
-import time
 import pythonClient
-import subprocess
 import registerGui
 
 
@@ -38,6 +31,7 @@ class LogHourForm:
         btn_submit = Button(self.window, text="Submit", command=self.chooser)
         btn_submit.pack(anchor='center')
 
+        # Register button
         btn_register = Button(self.window, text="Open Register", command=self.registerForm)
         btn_register.pack(anchor='ne')
 
@@ -64,11 +58,9 @@ class LogHourForm:
 
     def loginUser(self,pin):
         self.msg.configure(text=login(pin))
-        #playsound(u'among-us-roundstart.mp3')
 
     def logOutUser(self,pin,ignoreHours=False):
         self.msg.configure(text=logout(pin, ignoreHours))
-        #playsound(u'among-us-roundstart.mp3')
 
     def chooser(self):
 
@@ -87,25 +79,6 @@ class LogHourForm:
         print(self.loggedIn)
         waitForWritePickle("data/loggedIn.pickle",self.loggedIn)
         waitForWritePickle("data/tempHour.pickle",pythonClient.tempHour)
-
-    
-    def logOutAll(self):
-        for pin in self.loggedIn:
-            self.logOutUser(pin,True)
-        self.loggedIn = []
-    
-    def logOutForgotLogin(self):
-        currentTime = dt.datetime.now().time()
-        arbLateTime1 = dt.time(23,55,0)
-        arbLateTime2 = dt.time(23,56,0)
-
-        if self.timeInRange(arbLateTime1,arbLateTime2,currentTime):
-            self.logOutAll()
-        
-        self.window.after(1000, self.logOutForgotLogin)
-
-    def timeInRange(self,start,end,x):
-        return x>=start and x<=end
     
 
 
