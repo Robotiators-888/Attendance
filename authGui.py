@@ -81,7 +81,6 @@ class LogHourForm:
         waitForWritePickle("data/tempHour.pickle",pythonClient.tempHour)
     
 
-
         
 
 

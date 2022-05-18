@@ -87,6 +87,13 @@ def getUserFromPin(pin):
     return None
 
 def login(pin):
+
+    '''login(pin) logs in the user with the given pin. it updates the status of the user in the Google sheet
+
+    Returns "Invalid Pin" if the pin is not found
+    Returns "Logged in NAME at TIME" if the pin is found
+    
+    '''
     print("login")
     user = getUserFromPin(pin)
 
@@ -109,6 +116,15 @@ def login(pin):
         return "Logged in "+user+" at "+str(tempHour[pin])
 
 def logout(pin, ignoreHours=False):
+    '''logout(pin) logs out the user with the given pin. it updates the status+hours of the user in the Google sheet
+
+    Returns "Invalid Pin" if the pin is not found
+    Returns "Logged out NAME at TIME" if the pin is found
+    Returns "(Try logging in again) error logging in" if the user is not logged in/error in system
+    Returns "Forgot to logout, you get 2.5 hours" if the user forgets to logout
+
+    
+    '''
     forgotLogout = False
     print("logout")
     if ignoreHours:
@@ -156,6 +172,12 @@ def logout(pin, ignoreHours=False):
 
 
 def register(name,pin):
+    '''register(name,pin) registers the user and adds them on the Google sheet and pins.csv
+
+    Returns "Registered NAME" if the user is registered successfully
+    Returns "Error in registering ERROR" if the user is not registered successfully
+    
+    '''
     try:
         with open('pins.csv','a') as file:
             csv_writer = writer(file)
