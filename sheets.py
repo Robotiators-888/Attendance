@@ -26,7 +26,7 @@ class sheets:
         self.dates = self.getSheetDates(self.sheet)
 
 
-    def getSpreadsheet(self,sheetName) -> gspread.models.Spreadsheet:
+    def getSpreadsheet(self,sheetName):
         """ get shared spreadsheet by name"""
 
         scope = ['https://spreadsheets.google.com/feeds',

@@ -2,7 +2,7 @@ import pythonClient
 import time
 import sheets
 import os
-sheetName = "AttendanceOffSeason2022Test" 
+sheetName = "AttendanceOffSeason2022" 
 sheetObject = sheets.sheets(sheetName)
 
 #console colors

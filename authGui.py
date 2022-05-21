@@ -49,7 +49,7 @@ class LogHourForm:
 
         imageLabel.pack(anchor='center', side=BOTTOM)
 
-        self.window.after(1000, self.logOutForgotLogin) 
+        #self.window.after(1000, self.logOutForgotLogin) 
         self.window.mainloop()
 
     def registerForm(self):
